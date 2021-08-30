@@ -1,4 +1,4 @@
-package com.ruben.bottomnav.ui.theme
+package com.ruben.bottomnav
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable

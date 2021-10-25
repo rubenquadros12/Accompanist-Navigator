@@ -1,7 +1,10 @@
 package com.ruben.bottomnav
 
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -35,16 +38,28 @@ fun BottomNav() {
 
         NavHost(navController, Destinations.Home) {
             composable(Destinations.Home) {
-                HomeScreen(
-                    showSheet = {
-                        navController.navigate(Destinations.Sheet + "?arg=From Home Screen")
-                    },
-                    showFeed = { navController.navigate(Destinations.Feed) },
-                    showAnotherSheet = { navController.navigate(Destinations.Sheeet) }
-                )
+                ModalBottomSheetLayout(
+                    bottomSheetNavigator = bottomSheetNavigator,
+                    scrimColor = Color.Transparent,
+                    sheetBackgroundColor = Color.Transparent,
+                    sheetShape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
+                ) {
+                    HomeScreen(
+                        showSheet = {
+                            navController.navigate(Destinations.Sheet + "?arg=From Home Screen")
+                        },
+                        showFeed = { navController.navigate(Destinations.Feed) },
+                        showAnotherSheet = { navController.navigate(Destinations.Sheeet) }
+                    )
+                }
             }
             composable(Destinations.Feed) {
-                ModalBottomSheetLayout(bottomSheetNavigator) {
+                ModalBottomSheetLayout(
+                    bottomSheetNavigator = bottomSheetNavigator,
+                    scrimColor = Color.Transparent,
+                    sheetBackgroundColor = Color.White,
+                    sheetShape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
+                ) {
                     BottomComposable(
                         showSheet = {
                             navController.navigate(Destinations.Sheet + "?arg=From Home Screen")
